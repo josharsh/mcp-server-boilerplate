@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: tgsd-mcp
+    container_name: mcp-boilerplate
     ports:
       - "8000:8000"
     volumes:
