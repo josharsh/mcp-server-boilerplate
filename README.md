@@ -1,12 +1,12 @@
-# MCP Server Boilerplate (Python)
+# MCP Base
 
-A production-ready, extensible boilerplate for building Model Context Protocol (MCP) servers in **Python**. This template is designed to help you rapidly create, extend, and deploy MCP servers that expose tools, prompts, and resources to LLMs and agentic clients.
+A solid, foundational starting point for MCP projects. MCP Base is a production-ready, extensible template for building Model Context Protocol (MCP) servers in **Python**. Rapidly create, extend, and deploy MCP servers that expose tools, prompts, and resources to LLMs and agentic clients.
 
 ---
 
 ## 🚀 What is This?
 
-This is a **Python boilerplate**—not a specific server implementation. It provides a modular, well-documented foundation for building your own MCP servers in Python, supporting multiple transport layers (STDIO, SSE, HTTP, etc.), and demonstrating best practices for security, extensibility, and maintainability.
+This is a **Python starter base**—not a specific server implementation. It provides a modular, well-documented foundation for building your own MCP servers in Python, supporting multiple transport layers (STDIO, SSE, HTTP, etc.), and demonstrating best practices for security, extensibility, and maintainability.
 
 ---
 
@@ -30,9 +30,7 @@ This is a **Python boilerplate**—not a specific server implementation. It prov
 │   └── main.py              # Entrypoint: selects transport, starts server
 ├── tests/                   # Example tests for tools/resources
 ├── Dockerfile               # Containerized deployment
-├── docker-compose.yml       # Multi-container orchestration
 ├── requirements.txt / pyproject.toml
-├── .env.example             # Example environment variables
 ├── README.md                # This file
 ├── CONTRIBUTING.md
 └── ...
@@ -54,61 +52,25 @@ This is a **Python boilerplate**—not a specific server implementation. It prov
 
 ## 🛠️ Getting Started
 
-### 1. Configure Environment
-
-- Copy `.env.example` to `.env` and fill in required values.
-- The transport layer is selected via the `MCP_TRANSPORT` variable in `.env`:
-  - For STDIO: `MCP_TRANSPORT=stdio`
-  - For SSE: `MCP_TRANSPORT=sse`
-  - For HTTP: `MCP_TRANSPORT=http` (if implemented)
-
-### 2. Install Dependencies (Local Development)
+### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run the Server (Local)
+### 2. Configure Environment
 
-- **STDIO Transport:**
-  ```bash
-  python main.py
-  ```
-- **SSE Transport:**
-  - Set `MCP_TRANSPORT=sse` in your `.env`
-  - Optionally set `PORT=8080` or another port in `.env`
-  - Then run:
-    ```bash
-    python main.py
-    ```
+Copy `.env.example` to `.env` and fill in required values.
 
-### 4. Run with Docker
+### 3. Run the Server
 
-- **Build the Docker image:**
-  ```bash
-  docker build -t mcp-server .
-  ```
-- **Run the container:**
-  ```bash
-  docker run --env-file .env -p 8080:8080 mcp-server
-  ```
+**STDIO Transport:**
+```bash
+python main.py --transport=stdio
+```
 
-### 5. Run with Docker Compose (Recommended for SSE/HTTP)
-
-- **Build and start all services:**
-  ```bash
-  docker-compose build
-  docker-compose up
-  ```
-- This will use the settings in your `.env` (including `MCP_TRANSPORT` and `PORT`).
-
-### 6. Test Your MCP Server with MCP Inspector
-
-- Use [fastmcp](https://github.com/fastmcp/fastmcp) to test your server:
-  ```bash
-  fastmcp run dev
-  ```
-- This launches the MCP Inspector, which can connect to your running server (SSE/HTTP) and let you test tools, prompts, and resources interactively.
+**SSE/HTTP Transport:**
+See `/src/transports/sse/README.md` and `/src/transports/http/README.md` for details.
 
 ---
 
@@ -118,13 +80,13 @@ pip install -r requirements.txt
 
 - Create a new class in `/src/tools/` inheriting from `BaseTool`
 - Implement the required methods and input schema
-- Register the tool in the tool registry (see `app/tools.py` and `app/tools/__init__.py`)
+- Register the tool in the tool registry
 
 ### Prompts
 
 - Create a new class in `/src/prompts/` inheriting from `BasePrompt`
 - Implement the required methods and input schema
-- Register the prompt in the prompt registry (see `app/prompts.py` and `app/prompts/__init__.py`)
+- Register the prompt in the prompt registry
 
 ### Resources
 
@@ -139,7 +101,7 @@ pip install -r requirements.txt
 - **SSE:** For server-sent events and web clients (see `/src/transports/sse/README.md`)
 - **HTTP:** For RESTful or web-based integration (see `/src/transports/http/README.md`)
 
-Each transport is modular and can be extended or replaced. Select the transport by setting `MCP_TRANSPORT` in your `.env`.
+Each transport is modular and can be extended or replaced.
 
 ---
 
@@ -189,4 +151,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-This boilerplate is the recommended starting point for all new Python MCP server projects. Fork, extend, and contribute improvements!
+MCP Base is the recommended starting point for all new Python MCP server projects. Fork, extend, and contribute improvements!

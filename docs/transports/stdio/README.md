@@ -1,6 +1,6 @@
-# STDIO Transport for MCP Server Boilerplate (Python)
+# STDIO Transport for MCP Base
 
-This document explains the STDIO transport layer for the MCP Server Boilerplate. STDIO is the default and most universal transport for MCP servers, enabling communication via standard input/output streams. It is ideal for CLI integration, agentic workflows, and environments where network access is restricted.
+This document explains the STDIO transport layer for MCP Base. STDIO is the default and most universal transport for MCP servers, enabling communication via standard input/output streams. It is ideal for CLI integration, agentic workflows, and environments where network access is restricted.
 
 ---
 
@@ -67,7 +67,7 @@ python main.py --transport=stdio
 ## 📚 Further Reading
 
 - [Model Context Protocol Documentation](https://modelcontextprotocol.io/introduction)
-- [MCP Server Boilerplate README](../../../README.md)
+- [MCP Base README](../../../README.md)
 - [Other Transport Layers](../)
 
 ---

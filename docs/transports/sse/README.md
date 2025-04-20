@@ -1,6 +1,6 @@
-# SSE (Server-Sent Events) Transport for MCP Server Boilerplate (Python)
+# SSE (Server-Sent Events) Transport for MCP Base
 
-This document explains the SSE (Server-Sent Events) transport layer for the MCP Server Boilerplate. SSE enables the server to push real-time updates to clients over HTTP, making it ideal for web-based integrations, dashboards, and agentic workflows that require streaming responses.
+This document explains the SSE (Server-Sent Events) transport layer for MCP Base. SSE enables the server to push real-time updates to clients over HTTP, making it ideal for web-based integrations, dashboards, and agentic workflows that require streaming responses.
 
 ---
 
@@ -65,7 +65,7 @@ python main.py --transport=sse
 ## 📚 Further Reading
 
 - [Model Context Protocol Documentation](https://modelcontextprotocol.io/introduction)
-- [MCP Server Boilerplate README](../../../README.md)
+- [MCP Base README](../../../README.md)
 - [Other Transport Layers](../)
 
 ---

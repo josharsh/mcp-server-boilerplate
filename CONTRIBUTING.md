@@ -1,6 +1,6 @@
-# Contributing to MCP Server Boilerplate (Python)
+# Contributing to MCP Base
 
-Thank you for your interest in contributing! This project is a boilerplate for building Model Context Protocol (MCP) servers in **Python**. We welcome contributions of all kinds—code, documentation, tests, and ideas.
+Thank you for your interest in contributing! MCP Base is a solid, foundational starting point for building Model Context Protocol (MCP) servers in **Python**. We welcome contributions of all kinds—code, documentation, tests, and ideas.
 
 ---
 
