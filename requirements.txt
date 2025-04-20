@@ -1,0 +1,4 @@
+python-dotenv==1.0.0
+requests==2.32.2
+mcp[cli]>=1.6.0
+# Add your other dependencies here 

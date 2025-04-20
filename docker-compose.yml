@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tgsd-mcp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./.env:/app/.env:ro
+      # For development, uncomment to mount the current directory:
+      - ./main.py:/app/main.py:ro
+      - ./app:/app/app:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MCP_TRANSPORT=sse
+    restart: unless-stopped 
