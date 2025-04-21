@@ -38,6 +38,164 @@ This is a **Python starter base**—not a specific server implementation. It pro
 
 ---
 
+## Architecture Diagram
+
+```mermaid
+flowchart TD
+    %% Client
+    Client["Client (LLM/Agent)"]:::external
+
+    %% Transports Layer
+    subgraph "Transport Layer"
+        direction TB
+        STDIO["STDIO Transport"]:::plugin
+        SSE["SSE Transport"]:::plugin
+        HTTP["HTTP Transport"]:::plugin
+    end
+
+    %% Entrypoint
+    Main["main.py (Entrypoint)"]:::core
+
+    %% Configuration
+    Config["Config & Env (app/config.py)"]:::core
+
+    %% Server Core
+    subgraph "MCP Server Core"
+        direction TB
+        Dispatcher["Transport Dispatcher"]:::core
+        ToolReg["Tool Registry"]:::core
+        PromptReg["Prompt Registry"]:::core
+        ResourceReg["Resource Registry"]:::core
+    end
+
+    %% Base Modules
+    subgraph "Base Modules (app/base)"
+        direction TB
+        BaseTool["BaseTool"]:::core
+        BasePrompt["BasePrompt"]:::core
+        APIClient["APIClient"]:::core
+        ResultTypes["ResultTypes"]:::core
+    end
+
+    %% Plugin System - Tools
+    subgraph "Plugins - Tools"
+        direction TB
+        ToolsLoader["Tools Loader"]:::plugin
+        GlobalContext["global_context"]:::plugin
+        ListUploads["list_uploads"]:::plugin
+    end
+
+    %% Plugin System - Prompts
+    subgraph "Plugins - Prompts"
+        direction TB
+        PromptsLoader["Prompts Loader"]:::plugin
+        ActionItems["action_items"]:::plugin
+        ProjectInsights["project_insights"]:::plugin
+        Welcome["welcome"]:::plugin
+    end
+
+    %% External Integrations
+    subgraph "External Integrations"
+        direction TB
+        APISvc["External APIs"]:::external
+        FileSys["Filesystem (Sandbox)"]:::external
+        EnvVars["Environment Variables"]:::external
+    end
+
+    %% Deployment
+    subgraph "Deployment Infrastructure"
+        direction TB
+        Dockerfile["Dockerfile"]:::deploy
+        DockerCompose["docker-compose.yml"]:::deploy
+        DevSetup["dev-setup.sh"]:::deploy
+        DockerRun["docker-run.sh"]:::deploy
+    end
+
+    %% Docs for Transports
+    subgraph "Transport Documentation"
+        direction TB
+        DocStdio["docs/transports/stdio/README.md"]:::external
+        DocSSE["docs/transports/sse/README.md"]:::external
+    end
+
+    %% Connections
+    Client -->|sends request| STDIO
+    Client -->|sends request| SSE
+    Client -->|sends request| HTTP
+
+    STDIO --> Main
+    SSE --> Main
+    HTTP --> Main
+
+    Main -->|loads| Config
+    Main -->|initializes| Dispatcher
+
+    Dispatcher -->|routes| ToolReg
+    Dispatcher -->|routes| PromptReg
+    Dispatcher -->|routes| ResourceReg
+
+    ToolReg --> ToolsLoader
+    PromptsLoader --> PromptReg
+    ToolsLoader --> GlobalContext
+    ToolsLoader --> ListUploads
+    PromptsLoader --> ActionItems
+    PromptsLoader --> ProjectInsights
+    PromptsLoader --> Welcome
+
+    GlobalContext -->|uses| APIClient
+    ListUploads -->|uses| FileSys
+    ActionItems -->|uses| BaseTool
+    ProjectInsights -->|uses| BasePrompt
+    Welcome -->|uses| ResultTypes
+
+    BaseTool --> ToolReg
+    BasePrompt --> PromptReg
+    APIClient --> APISvc
+    ResultTypes -->|returned| Dispatcher
+
+    Config -->|env| EnvVars
+
+    Dispatcher -->|responds| Client
+
+    Dockerfile -->|builds image| Main
+    DockerCompose -->|orchestrates| Dockerfile
+    DevSetup -->|sets up| EnvVars
+    DockerRun -->|runs| DockerCompose
+
+    STDIO --> DocStdio
+    SSE --> DocSSE
+
+    %% Click Events
+    click Main "https://github.com/josharsh/mcp-server-boilerplate/blob/main/main.py"
+    click Config "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/config.py"
+    click Dispatcher "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/server.py"
+    click BaseTool "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/base/base_tool.py"
+    click BasePrompt "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/base/base_prompt.py"
+    click APIClient "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/base/api_client.py"
+    click ResultTypes "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/base/result_types.py"
+    click ToolsLoader "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/tools.py"
+    click GlobalContext "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/tools/global_context.py"
+    click ListUploads "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/tools/list_uploads.py"
+    click PromptsLoader "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/prompts.py"
+    click ActionItems "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/prompts/action_items.py"
+    click ProjectInsights "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/prompts/project_insights.py"
+    click Welcome "https://github.com/josharsh/mcp-server-boilerplate/blob/main/app/prompts/welcome.py"
+    click Dockerfile "https://github.com/josharsh/mcp-server-boilerplate/tree/main/Dockerfile"
+    click DockerCompose "https://github.com/josharsh/mcp-server-boilerplate/blob/main/docker-compose.yml"
+    click DevSetup "https://github.com/josharsh/mcp-server-boilerplate/blob/main/dev-setup.sh"
+    click DockerRun "https://github.com/josharsh/mcp-server-boilerplate/blob/main/docker-run.sh"
+    click DocStdio "https://github.com/josharsh/mcp-server-boilerplate/blob/main/docs/transports/stdio/README.md"
+    click DocSSE "https://github.com/josharsh/mcp-server-boilerplate/blob/main/docs/transports/sse/README.md"
+
+    %% Styles
+    classDef core fill:#cce5ff,stroke:#004085,color:#004085
+    classDef plugin fill:#d4edda,stroke:#155724,color:#155724
+    classDef external fill:#fff3cd,stroke:#856404,color:#856404
+    classDef deploy fill:#e2e3e5,stroke:#6c757d,color:#6c757d
+```
+
+---
+
 ## ✨ Features
 
 - **Multi-Transport Support:** STDIO, SSE, HTTP, and more (see `/src/transports/`)
