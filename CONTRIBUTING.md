@@ -12,6 +12,80 @@ Thank you for your interest in contributing! MCP Base is a solid, foundational s
 4. **Document your changes** in the relevant README or code comments.
 5. **Submit a pull request** with a clear description of your changes and why they are needed.
 
+## First-Time Contributors
+
+For first time contributors, follow the instructions below:
+
+## Step 1: Set Up Your Environment
+
+Follow these steps to get the project running locally:
+
+1. Fork the repo by clicking the "Fork" button in the top right corner.
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/mcp-base.git
+   cd mcp-base
+Install dependencies:
+
+   :```bash
+   pip install -r requirements.txt
+   Run the tests to ensure everything works.
+
+## Step 2: Find an Issue
+Look for "good first issue" labels
+
+Comment to claim the issue
+
+Ask questions if anything is unclear
+
+Step 3: Create Your Branch
+Branch off from main using a descriptive name:
+
+:```bash
+git checkout -b fix/issue-101-doc-typo
+
+## Step 4: Make Your Change
+Write clean, modular code that follows the style guide:
+
+Use PEP8 and type hints
+
+Run Black to format your code
+
+Add/modify tests if needed (in /tests/)
+
+Comment on anything that's not obvious
+
+If you're adding a tool, prompt, or transport, document it!
+
+## Step 5: Commit and Push
+:```bash
+git add .
+git commit -m "Fix typo in X doc"
+git push origin fix/issue-101-doc-typo
+
+## Step 6: Open a Pull Request
+Go to your fork on GitHub and click "Compare & pull request."
+
+Fill in:
+
+A clear title and description
+
+Mention the issue it closes (e.g., Closes #101)
+
+What you did and why
+
+## Step 7: What Happens Next?
+After you submit your PR:
+
+A maintainer will review it and may suggest changes
+
+You can update your PR by pushing new commits
+
+Once approved, it will be merged!
+
+Congrats, you're now an MCP Base contributor! 🎉
+ 
+
 ---
 
 ## 🧑‍💻 Code Style
