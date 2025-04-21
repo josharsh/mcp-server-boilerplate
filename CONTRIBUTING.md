@@ -27,11 +27,11 @@ Follow these steps to get the project running locally:
    cd mcp-base
 Install dependencies:
 
-bash
-pip install -r requirements.txt
-Run the tests to ensure everything works.
+   :```bash
+   pip install -r requirements.txt
+   Run the tests to ensure everything works.
 
-##Step 2: Find an Issue
+## Step 2: Find an Issue
 Look for "good first issue" labels
 
 Comment to claim the issue
@@ -41,10 +41,10 @@ Ask questions if anything is unclear
 Step 3: Create Your Branch
 Branch off from main using a descriptive name:
 
-bash
+:```bash
 git checkout -b fix/issue-101-doc-typo
 
-##Step 4: Make Your Change
+## Step 4: Make Your Change
 Write clean, modular code that follows the style guide:
 
 Use PEP8 and type hints
@@ -57,13 +57,13 @@ Comment on anything that's not obvious
 
 If you're adding a tool, prompt, or transport, document it!
 
-##Step 5: Commit and Push
-bash
+## Step 5: Commit and Push
+:```bash
 git add .
 git commit -m "Fix typo in X doc"
 git push origin fix/issue-101-doc-typo
 
-##Step 6: Open a Pull Request
+## Step 6: Open a Pull Request
 Go to your fork on GitHub and click "Compare & pull request."
 
 Fill in:
@@ -74,7 +74,7 @@ Mention the issue it closes (e.g., Closes #101)
 
 What you did and why
 
-##Step 7: What Happens Next?
+## Step 7: What Happens Next?
 After you submit your PR:
 
 A maintainer will review it and may suggest changes
