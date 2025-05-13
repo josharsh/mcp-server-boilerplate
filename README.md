@@ -55,7 +55,11 @@ This is a **Python starter base**—not a specific server implementation. It pro
 ### 1. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+uv venv
+source .venv/bin/activate
+
+uv pip install --upgrade pip
+uv pip install .
 ```
 
 ### 2. Configure Environment
@@ -67,6 +71,10 @@ Copy `.env.example` to `.env` and fill in required values.
 **STDIO Transport:**
 ```bash
 python main.py --transport=stdio
+```
+Or
+```bash
+uv main.py --transport=stdio
 ```
 
 **SSE/HTTP Transport:**
@@ -99,7 +107,6 @@ See `/src/transports/sse/README.md` and `/src/transports/http/README.md` for det
 
 - **STDIO:** For CLI and agentic integration (see `/src/transports/stdio/README.md`)
 - **SSE:** For server-sent events and web clients (see `/src/transports/sse/README.md`)
-- **HTTP:** For RESTful or web-based integration (see `/src/transports/http/README.md`)
 
 Each transport is modular and can be extended or replaced.
 
