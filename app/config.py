@@ -17,4 +17,3 @@ class ApiSettings(BaseSettings):
     api_version: str = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
 
 settings = ApiSettings()
-print(settings.dict())

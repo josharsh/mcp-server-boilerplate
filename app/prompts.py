@@ -17,6 +17,7 @@ For more advanced prompts, organize them as classes in app/prompts/ and import/r
 """
 
 def register_prompts(mcp):
+    print("Registering prompts...")
     # Example prompt template (uncomment and customize)
     #
     # @mcp.prompt()

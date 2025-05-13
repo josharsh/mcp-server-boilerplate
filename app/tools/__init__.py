@@ -16,15 +16,37 @@ To add a new tool class:
 For simple tools, you can also define and register them directly in app/tools.py.
 """
 
+from app.tools.helloworld import HelloTool
+from app.tools.simplecalc import SimpleCalc
+from app.base.api_client import APIClient
+
 def register_tools(mcp):
-    # Example tool class registration (uncomment and customize)
-    #
-    # from app.tools.my_tool import MyTool
-    # @mcp.tool()
-    # async def my_tool_entrypoint(...):
-    #     tool = MyTool(...)
-    #     result = await tool()
-    #     return result
-    #
-    # Add more tool registrations below as needed.
-    pass  # Remove this line when you add your first tool
+    print("Registering tools...")
+
+    api_client = APIClient()
+
+    @mcp.tool()
+    async def hello_tool(name: str):
+        """
+        Returns a greeting for the given name.
+        Args:
+            name: The name to greet.
+        Returns:
+            A greeting string.
+        """
+        tool = HelloTool(api_client)
+        return await tool.run(name)
+
+    @mcp.tool()
+    async def simple_calculator(num1: float = 0, operator: str = "add", num2: float = 0):
+        """
+        Simple calculator tool.
+        Args:
+            num1: first number
+            operator: operation (add, subtract, multiply, divide)
+            num2: second number
+        Returns:
+            A result dictionary with the result of the operation.
+        """
+        tool = SimpleCalc(api_client)
+        return await tool.run(num1, operator, num2)
