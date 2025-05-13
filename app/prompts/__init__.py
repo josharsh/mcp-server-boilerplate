@@ -15,16 +15,24 @@ To add a new prompt class:
 
 For simple prompts, you can also define and register them directly in app/prompts.py.
 """
+from app.prompts.welcome import WelcomePrompt
 
 def register_prompts(mcp):
-    # Example prompt class registration (uncomment and customize)
-    #
-    # from app.prompts.my_prompt import MyPrompt
-    # @mcp.prompt()
-    # def my_prompt_entrypoint() -> str:
-    #     prompt = MyPrompt()
-    #     result = prompt()
-    #     return result
-    #
-    # Add more prompt registrations below as needed.
-    pass  # Remove this line when you add your first prompt
+    print("Registering prompts...")
+
+    @mcp.prompt()
+    def welcome_prompt() -> str:
+        """
+        Example Welcome Prompt.
+        """
+        prompt = WelcomePrompt()
+        result = prompt()
+        return result
+
+    @mcp.prompt()
+    def example_prompt() -> str:
+        """
+        Example prompt description or template.
+        You can use triple-quoted strings for multi-line prompts.
+        """
+        return example_prompt.__doc__

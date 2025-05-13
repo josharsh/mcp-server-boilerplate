@@ -1,2 +1,5 @@
-# Placeholder for user-defined prompt modules.
-# Add your custom prompt classes here and import them in app/prompts/__init__.py.
+from app.base.base_prompt import BasePrompt
+
+class WelcomePrompt(BasePrompt):
+    def __call__(self) -> str:
+        return "Welcome to the MCP server! How can I assist you today?"
