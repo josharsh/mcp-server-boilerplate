@@ -16,9 +16,12 @@ To add a new prompt class:
 For simple prompts, you can also define and register them directly in app/prompts.py.
 """
 from app.prompts.welcome import WelcomePrompt
+import logging
+
+logger = logging.getLogger("app.prompts")
 
 def register_prompts(mcp):
-    print("Registering prompts...")
+    logger.info("Registering prompts...")
 
     @mcp.prompt()
     def welcome_prompt() -> str:

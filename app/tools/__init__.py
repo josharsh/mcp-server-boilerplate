@@ -19,9 +19,12 @@ For simple tools, you can also define and register them directly in app/tools.py
 from app.tools.helloworld import HelloTool
 from app.tools.simplecalc import SimpleCalc
 from app.base.api_client import APIClient
+import logging
+
+logger = logging.getLogger("app.tools")
 
 def register_tools(mcp):
-    print("Registering tools...")
+    logger.info("Registering tools...")
 
     api_client = APIClient()
 
